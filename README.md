@@ -67,7 +67,7 @@ This makes the system **self-serving for both Dev and Ops teams**, ensuring obse
 ## 📖 Getting Started
 - Clone the repo:
   ```
-  git clone https://github.com/neeabhishek/time-series-helm-elk.git
+  git clone https://github.com/neeabhishek/time-series-helm-elk.git](https://github.com/neeabhishek/micro-service-helm-elk.git)
   cd micro-service-helm-elk
   ```
   
@@ -83,4 +83,8 @@ This makes the system **self-serving for both Dev and Ops teams**, ensuring obse
   ```
   kubectl get all -n app -o wide
   ```
-
+  
+## (Optional) 🎯 Important Considerations for Productions
+- Use storageClass or PV for volumes in Production.
+- Enable security features at elasticsearch, logstash, and kibana layer through ConfigMap.
+- If application is generating logs at /var then use `` add_kubernetes_metadata `` in file-beat ConfigMap for kubernetes metadata. Service account, CluserRole, and ClusterRoleBinding exists in the templates directory for commuication to kube-apiserver.
