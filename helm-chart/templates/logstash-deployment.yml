@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.logstash.name }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.logstash.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.logstash.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.logstash.name }}
+    spec:
+      containers:
+        - name: {{ .Values.logstash.name }}
+          image: "{{ .Values.logstash.image.repository }}:{{ .Values.logstash.image.tag }}"
+          imagePullPolicy: {{ .Values.app.image.imagePullPolicy }}
+          ports:
+            - containerPort: 5044
+          volumeMounts:
+            {{- toYaml .Values.logstash.volumeMounts | nindent 12 }}
+      volumes:
+        {{- toYaml .Values.logstash.volumes | nindent 8 }}

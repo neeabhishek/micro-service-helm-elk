@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logstash-pipeline
+  namespace: {{ .Values.namespace }}
+data:
+  logstash.conf: |
+    input {
+      beats {
+        port => 5044
+      }
+    }
+
+    filter {
+      if[event] == "access_log" {
+        mutate { add_tag => ["access"]}
+      } else if [event] == "application_log"{
+        mutate { add_tag => ["application"]}
+      }
+    }
+
+    output {
+      elasticsearch {
+        hosts => ["http://elasticsearch:9200"]
+        index => "{{ .Values.logstash.pipeline.indexPrefix }}-{[log_type]}-%{+YYYY.MM.dd}"
+      }
+      stdout { codec => rubydebug }
+    }

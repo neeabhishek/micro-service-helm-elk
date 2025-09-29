@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: filebeat-config
+    namespace: {{ .Values.namespace }}
+data:
+    filebeat.yml: |
+        filebeat.inputs:
+            - type: log
+              enabled: true
+              paths:
+                - /app/logs/access.log
+              fields:
+                log_type: access
+                fileds_under_root: true
+              json.keys_under_root: true
+              json.add_error_key: true
+
+            - type: log
+              enabled: true
+              paths:
+                - /app/logs/application.log
+              fields:
+                log_type: application
+                fileds_under_root: true
+              json.keys_under_root: true
+              json.add_error_key: true
+
+        processors:
+            - add_fields:
+                target:
+                fields:
+                  pod_name: ${POD_NAME}
+                  namespace_name: ${POD_NAMESPACE}
+                  node_name: ${NODE_NAME}
+        output.logstash:
+            hosts: ["{{ .Values.filebeat.output.logstashHost }}:{{ .Values.filebeat.output.logstashPort }}"]
