@@ -67,7 +67,7 @@ This makes the system **self-serving for both Dev and Ops teams**, ensuring obse
 ## 📖 Getting Started
 - Clone the repo:
   ```
-  git clone https://github.com/neeabhishek/time-series-helm-elk.git](https://github.com/neeabhishek/micro-service-helm-elk.git)
+  git clone https://github.com/neeabhishek/micro-service-helm-elk.git
   cd micro-service-helm-elk
   ```
   
