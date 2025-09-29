@@ -87,4 +87,4 @@ This makes the system **self-serving for both Dev and Ops teams**, ensuring obse
 ## (Optional) 🎯 Important Considerations for Productions
 - Use storageClass or PV for volumes in Production.
 - Enable security features at elasticsearch, logstash, and kibana layer through ConfigMap.
-- If application is generating logs at /var then use `` add_kubernetes_metadata `` in file-beat ConfigMap for kubernetes metadata. Service account, CluserRole, and ClusterRoleBinding exists in the templates directory for commuication to kube-apiserver.
+- If application is generating logs at /var then use `` add_kubernetes_metadata `` in file-beat ConfigMap for kubernetes metadata. Service account, CluserRole, and ClusterRoleBinding exists in the templates directory for fetching cluster-data though kube-apiserver.
