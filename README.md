@@ -1,15 +1,18 @@
 # micro-service-helm-elk
-Helm chart for micro-service with build-in observability.
+Helm chart for micro-service with build-in observability and CIS compliance.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-Helm-blue?logo=kubernetes)](https://helm.sh)
 [![Python](https://img.shields.io/badge/Python-3.9+-yellow?logo=python)](https://www.python.org/)
 [![ELK Stack](https://img.shields.io/badge/Observability-ELK-cc0000?logo=elastic)](https://www.elastic.co/what-is/elk-stack)
 [![Docker](https://img.shields.io/badge/Container-Docker-2496ED?logo=docker)](https://www.docker.com/)
 
-Helm chart + Python app for a **time-series microservice** with built-in observability via **ELK** (Elasticsearch, Logstash, Kibana).  
+Helm chart + Python app for a **time-series microservice** with built-in observability via **ELK** (Elasticsearch, Logstash, Kibana) and Security.
 
-This repo demonstrates how to deploy a Python-based microservice on Kubernetes using Helm, with **sidecar-based log collection** using Filebeat, integrated into the ELK stack for **monitoring, troubleshooting, and visibility from Day 1**.
+This repo demonstrates how to deploy a Python-based microservice on Kubernetes using Helm, with:  
+- **Sidecar-based log collection** via Filebeat  
+- **Multi-stage Docker builds** to reduce image size  
+- **CIS benchmark adherence** by running as a non-root user  
+- **SRE focus** (improved MTTD/MTTR, meeting SLI/SLOs) 
 
 ---
 
@@ -59,5 +62,25 @@ This makes the system **self-serving for both Dev and Ops teams**, ensuring obse
 - **Sidecar approach** keeps log collection tightly coupled with app lifecycle.  
 - SRE-focused improvements in **MTTD, MTTR, and SLO adherence**.  
 - Reusable Helm setup for other microservices.  
-- Extensible: plug in Prometheus, OpenTelemetry, tracing, etc.  
+- Extensible: plug in Prometheus, OpenTelemetry, tracing, etc.
+
+## 📖 Getting Started
+- Clone the repo:
+  ```
+  git clone https://github.com/neeabhishek/time-series-helm-elk.git
+  cd micro-service-helm-elk
+  ```
+  
+- Build & deploy:
+  ```
+  helm package helm-chart
+  helm lint time-series*.tar.gz
+  helm template time-series*.tar.gz --debug
+  helm install time-series time-series*.tar.gz
+  ```
+  
+- Verification:
+  ```
+  kubectl get all -n app -o wide
+  ```
 
