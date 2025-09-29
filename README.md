@@ -1,5 +1,5 @@
 # micro-service-helm-elk
-Helm chart for micro-service with build-in observability and CIS compliance.
+Micro-service orchestration with build-in observability and CIS compliance using Helm.
 
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-Helm-blue?logo=kubernetes)](https://helm.sh)
 [![Python](https://img.shields.io/badge/Python-3.9+-yellow?logo=python)](https://www.python.org/)
